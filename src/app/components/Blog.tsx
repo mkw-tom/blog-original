@@ -10,11 +10,11 @@ const Blog = ({blogData}: any) => {
   return (
     <>
       {blogData.map((data:any, index:number) => (
-        <Link href={`blogPages/${index}`}>
-          <li key={data.id} className='inline-block w-64 h-64 bg-white rounded-md shadow-lg px-3 py-3 relative hover:opacity-70 hover:duration-1500'>
-            <img src={data.eyecatch?.url} alt="eyecatch" width={data.eyecatch?.width} height={data.eyecatch?.height}/>
-            <h2 className='text-center mt-5'>{data.title}</h2>
-            <p className='absolute bottom-1 right-2'>更新：{new Date().toLocaleDateString(data.updataDateAt)}</p>
+        <Link key={data.id} href={`blogPages/${index}`} className='bg-orange-300'>
+          <li  className='inline-block w-52 h-52 bg-white rounded-md shadow-lg px-3 py-3 relative hover:opacity-70 hover:duration-1500'>
+            <img src={data.eyecatch?.url} alt="eyecatch"/>
+            <h2 className='text-center mt-5 '>{data.title}</h2>
+            <p className='absolute bottom-1 right-2 text-sm'>更新：{new Date().toLocaleDateString(data.updataDateAt)}</p>
           </li>
         </Link>
       ))}

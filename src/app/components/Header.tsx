@@ -3,7 +3,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="flex itmes-center justify-around w-full h-aut bg-amber-700 shadow-xl">
+    <header className="flex itmes-center justify-around w-full h-aut bg-amber-700 pb-1 shadow-xl fixed top-0 z-10">
       <h1 className="text-white text-3xl my-9">BLOG</h1>
       <nav className="flex text-white my-9 list-none gap-8 text-lg">
         <Link href="/" className="hover:opacity-65 duration-150">
