@@ -1,17 +1,18 @@
-import BlogList from "./components/BlogList";
 import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer ";
 import { useState } from "react";
+import { getBlogData } from "./libs/client";
+import BlogList from "./components/blogList/BlogList";
 
-
-export default function Home() {
+export default async function Home() {
+  const blogData = await getBlogData();
 
   return (
-    <div >
+    <div>
       <Header />
-      <div className="bg-blue-300 w-full h-96 mt-28 text-4xl"></div>
-      <BlogList />
+
+      <BlogList blogData={blogData} />
       <Footer />
     </div>
   );

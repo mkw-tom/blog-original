@@ -54,7 +54,7 @@ const Blogs = ({ blogData }: { blogData: any }) => {
         </ul>
       </div>
 
-      <ul className="flex flex-wrap gap-7 mt-10 mx-auto w-11/12 md:w-10/12 min-h-96 mb-24">
+      <ul className="flex flex-wrap gap-7 mt-12 mx-auto w-11/12 md:w-10/12 min-h-96">
         {blogs.map((data: any, index: number) => (
           <Link
             key={data.id}

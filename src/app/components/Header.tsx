@@ -12,13 +12,10 @@ const Header = () => {
         <Link href="/" className="hover:opacity-65 duration-150">
           home
         </Link>
-        <Link href="/blogListPage" className="hover:opacity-65 duration-150">
-          投稿一覧
-        </Link>
         <Link href="/" className="hover:opacity-65 duration-150">
           サイト概要
         </Link>
-        <Link href="/" className="hover:opacity-65 duration-150">
+        <Link href="/loginPage" className="hover:opacity-65 duration-150">
           ログイン
         </Link>
       </nav>

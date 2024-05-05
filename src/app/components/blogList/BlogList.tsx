@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { Search } from "@mui/icons-material";
-import SearchBlog from "./SearchBlogs";
 import Link from "next/link";
-import Blogs from "./Blogs";
+import Blogs from "./Blog";
+import SearchBlog from "./SearchBlog";
+
 
 const BLogLIst = ({ blogData }: any) => {
   const [inputText, setInputText] = useState<string>();
@@ -12,8 +13,8 @@ const BLogLIst = ({ blogData }: any) => {
     <div>
       <div className="mt-40 bg-blue-100"></div>
       <main className="flex-col items-center text-center">
-        <h1 className="inline-block text-3xl font-bold text-amber-700 border-b-2 border-amber-700">
-          投稿一覧
+        <h1 className="inline-block text-5xl font-bold text-amber-700 my-10">
+          welcome to my Blog !!
         </h1>
         <div className="flex justify-center mt-6">
           <input
