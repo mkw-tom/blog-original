@@ -12,7 +12,7 @@ export const getBlogData = async () => {
 
   const response = await client.getList({
     customRequestInit: {
-     cache: "no-store", // キャッシュを利用せずに常に新しいデータを取得する
+     cache: "force-cache", // キャッシュを利用せずに常に新しいデータを取得する
     },
     endpoint: endpoint,
    });

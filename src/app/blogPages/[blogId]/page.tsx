@@ -19,7 +19,7 @@ const page = async ({ params }: { params: { blogId: number } }) => {
       <div className="mt-40"></div>
       <main className="flex justify-around mt-10 w-10/12 h-auto mb-16 mx-auto">
         <div className="w-auto h-auto min-w-96 mx-5 px-7 py-10 rounded-md shadow-lg bg-white flex-1">
-          <h1 className="h-auto text-3xl font-bold mb-6">{page.title}</h1>
+          <h1 className="h-auto text-3xl font-bold mb-6 border-l-8 border-l-amber-700 pl-5">{page.title}</h1>
           <div className="flex w-full justify-between ">
             <p className="flex flex-wrap  text-gray-500 w-8/12">
               <span className="mr-3">
