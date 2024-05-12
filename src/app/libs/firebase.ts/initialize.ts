@@ -4,13 +4,13 @@ import { getAnalytics } from "firebase/analytics";
 import { GithubAuthProvider, GoogleAuthProvider, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBRll3tBGrcWlWoogetQnqzqVbJXCOBi94",
-  authDomain: "myblog-28ed3.firebaseapp.com",
-  projectId: "myblog-28ed3",
-  storageBucket: "myblog-28ed3.appspot.com",
-  messagingSenderId: "211857021549",
-  appId: "1:211857021549:web:af4fdc5102b0fa12efbd64",
-  measurementId: "G-0HTDMVY6Q6"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASURMENT_ID,
 };
 
 // Initialize Firebase
