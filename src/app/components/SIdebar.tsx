@@ -21,7 +21,7 @@ const SIdebar = () => {
       >
         <ul className="flex-col">
           <Link
-            href="/"
+            href="/loginPage"
             className="relative block w-full text-center py-3 border-b-2 border-r-2 border-gray-300 text-amber-700 hover:bg-amber-100"
           >
             <span className="absolute left-5 top-3"><Login></Login></span> ログイン
@@ -33,7 +33,7 @@ const SIdebar = () => {
             <span className="absolute left-5 top-3"><Home></Home></span>ホーム
           </Link>
           <Link
-            href="/loginPage"
+            href=""
             className="relative block w-full text-center py-3 border-b-2 border-r-2 border-gray-300 text-amber-700 hover:bg-amber-100"
           >
             <span className="absolute left-5 top-3"><Business></Business></span>サイト概要

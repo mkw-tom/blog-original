@@ -7,8 +7,10 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentIcon from "@mui/icons-material/Comment";
 import { Send } from "@mui/icons-material";
 import SideMenu from "../component/SideMenu";
+import CommentForm from "../component/CommentForm";
 
 const page = async ({ params }: { params: { blogId: number } }) => {
+
   const blogData = await getBlogData();
   const blogNum: number = params.blogId;
   const page = blogData[blogNum];
@@ -35,17 +37,10 @@ const page = async ({ params }: { params: { blogId: number } }) => {
           </div>
           <img src={page.eyecatch?.url} alt="" />
           {parse(page.content)}
-          <div className="mt-16 border-t-2 border-gray-400">
-            <p className="mt-5 text-amber-600">コメントを書く</p>
-            <textarea className="shadow-inner border-2 border-gray-200 w-full h-24 outline-2 outline-amber-300"></textarea>
-            <button className="block ml-auto text-amber-600 border-2 border-amber-600 hover:bg-amber-600 hover:text-white px-3 -y-1 rounded-md">
-              <Send></Send>
-            </button>
-            <div className="mt-10 border-y-2 border-gray-400 text-center">
-              <p className="my-5 text-gray-400">コメントがありません。</p>
-            </div>
-          </div>
+
+          <CommentForm />
         </div>
+        
         <SideMenu blogData={blogData}/>
       </main>
       <Footer />

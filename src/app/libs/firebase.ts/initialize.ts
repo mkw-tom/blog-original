@@ -18,5 +18,4 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const GoogleProvider = new GoogleAuthProvider;
 const GitHubProvider = new GithubAuthProvider
-const analytics = getAnalytics(app);
 export {auth, GoogleProvider, GitHubProvider}

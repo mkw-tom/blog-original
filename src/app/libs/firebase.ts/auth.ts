@@ -8,8 +8,16 @@ import {
   signInWithRedirect,
 } from "firebase/auth";
 
-import { FormEvent, MouseEvent } from "react";
 import { GitHubProvider, GoogleProvider, auth } from "./initialize";
+
+//-------サインアウト--ーーー
+export const handleLogout = () => {
+  if(!confirm("ログアウトしますか？")) {
+    return;
+  }
+  auth.signOut();
+}
+
 
 //ーーーーーgoogleログインーーーーー
 export const GoogleLogin = async () => {

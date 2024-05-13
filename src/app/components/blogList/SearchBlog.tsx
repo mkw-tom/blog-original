@@ -10,7 +10,7 @@ const searchBlogs = ({ blogData, inputText }: SearchBlogsProps) => {
 
   return (
     <>
-      <ul className="flex flex-wrap gap-7 mt-10 mx-auto w-11/12 md:w-10/12  min-h-96 mb-24 ">
+      <ul className="flex flex-wrap gap-7 mt-10 mx-auto w-11/12 md:w-10/12 min-h-96">
         {searchBlog.length === 0 ? (
         <p className="block text-2xl w-96 h-9 mx-auto mt-16 text-center opacity-70">記事が見つかりません。</p>
       ) : (
