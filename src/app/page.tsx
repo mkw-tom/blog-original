@@ -11,7 +11,6 @@ export default async function Home() {
   return (
     <div>
       <Header />
-
       <BlogList blogData={blogData} />
       <Footer />
     </div>
