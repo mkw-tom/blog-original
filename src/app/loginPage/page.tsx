@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer ";
 import EmailForm from "./EmailForm";
@@ -10,11 +10,19 @@ import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
+import { saveUserData } from "../libs/firebase.ts/firestore";
 
 const page = () => {
   const [emailLogin, setEmailLogin] = useState<boolean>(false);
   const [user] = useAuthState(auth);
   const router = useRouter();
+  
+  useEffect(() => {
+    if(user === null) {
+      return
+    }
+    saveUserData();
+  }, [user])
 
   return (
     <div>

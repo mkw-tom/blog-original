@@ -18,7 +18,7 @@ const Header = () => {
     <header className="flex itmes-center justify-between w-full h-auto bg-amber-700 pb-1 shadow-xl fixed top-0 z-10">
       <SIdebar />
       <h1 className="text-white text-3xl font-bold tracking-widest my-9 mx-auto">
-        赤ちゃんエンジニア
+        TestBlog
       </h1>
       <nav className="hidden items-center text-white  list-none gap-8 text-lg  md:flex mr-16">
         <Link href="/" className="hover:opacity-65 duration-150">

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Header from "./components/Header";
 import Footer from "./components/Footer ";
-import { useState } from "react";
 import { getBlogData } from "./libs/client";
 import BlogList from "./components/blogList/BlogList";
 

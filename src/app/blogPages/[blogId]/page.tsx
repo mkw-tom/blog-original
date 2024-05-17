@@ -38,7 +38,7 @@ const page = async ({ params }: { params: { blogId: number } }) => {
           <img src={page.eyecatch?.url} alt="" />
           {parse(page.content)}
 
-          <CommentForm />
+          <CommentForm page={page}/>
         </div>
         
         <SideMenu blogData={blogData}/>
