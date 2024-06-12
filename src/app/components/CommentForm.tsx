@@ -1,13 +1,13 @@
 "use client";
-import { auth } from "@/app/libs/firebase.ts/initialize";
+import { auth } from "@/app/libs/firebase/initialize";
 import { Login, Send,  } from "@mui/icons-material";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentArea from "./CommentArea ";
-import { CommentDataProps } from "@/type";
-import { setCommentedData } from "@/app/libs/firebase.ts/firestore";
+import { CommentDataProps } from "@/app/type";
+import { setCommentedData } from "@/app/libs/firebase/firestore";
 
 const CommentForm = ({page}: {page: any}) => {
   const [user] = useAuthState(auth);
@@ -26,7 +26,7 @@ const CommentForm = ({page}: {page: any}) => {
       userPhoto:user?.photoURL,
       text: newText,
     }
-    setCommentedData(newData);
+    setCommentedData(page.id, page.title, newData);
 
     setCommentList([...commentList, newData]);
     ref.current.value = ""

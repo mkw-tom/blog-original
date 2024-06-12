@@ -2,7 +2,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore"
 import { auth, db } from "./initialize"
 import { updateProfile } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
-import { CommentDataProps } from "@/type";
+import { CommentDataProps } from "@/app/type";
 
 //ユーザーデータ作成の手続き
 const createUserData = async () => {
@@ -73,9 +73,9 @@ export const saveUserData = async () => {
 };
 
 //⭐️ユーザーのコメントデータを保存⭐️
-export const setCommentedData = async ( newData: CommentDataProps ) => {
+export const setCommentedData = async (pageId: any, pageTitle: any, newData: CommentDataProps ) => {
   const docId: string = uuidv4();
-  await setDoc(doc(db, "users", `${auth.currentUser?.uid}`, "commented", `${docId}`), {
+  await setDoc(doc(db, "comments", `${pageId}`, `${pageTitle}`, `${docId}`), {
     ...newData
   })
 }

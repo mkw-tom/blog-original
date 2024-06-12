@@ -12,8 +12,8 @@ import {
 } from "@mui/icons-material";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../libs/firebase.ts/initialize";
-import { handleLogout } from "../libs/firebase.ts/auth";
+import { auth } from "../../libs/firebase/initialize";
+import { handleLogout } from "../../libs/firebase/auth";
 
 const SIdebar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

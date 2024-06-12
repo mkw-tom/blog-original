@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Header from "./components/Header";
-import Footer from "./components/Footer ";
-import { getBlogData } from "./libs/client";
-import BlogList from "./components/blogList/BlogList";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer ";
+import { getBlogData } from "./libs/micro-cms/client";
+import BlogList from "./components/BlogList";
 
 export default async function Home() {
   const blogData = await getBlogData();

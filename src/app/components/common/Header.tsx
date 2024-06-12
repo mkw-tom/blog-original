@@ -3,9 +3,9 @@ import Link from "next/link";
 import React, { useState } from "react";
 import SIdebar from "./SIdebar";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../libs/firebase.ts/initialize";
+import { auth } from "../../libs/firebase/initialize";
 import { signOut } from "firebase/auth";
-import { handleLogout } from "../libs/firebase.ts/auth";
+import { handleLogout } from "../../libs/firebase/auth";
 import { ArrowRight } from "@mui/icons-material";
 import { Button } from "@mui/material";
 

@@ -9,6 +9,16 @@ const SideMenu = ({ blogData }: any) => {
   const searchBlog: any = blogData.filter((data: any) =>
     data.title.includes(`${inputText}`)
   );
+
+
+  const pageTitle = (title: any) => {
+    if(title.length > 15) {
+      return title.substring(0, 15) + "..."
+    } else {
+      return title
+    }
+  }
+
   return (
     <>
       <div className="flex-col w-auto max-w-80 h-auto mx-5 rounded-md ">
@@ -47,12 +57,12 @@ const SideMenu = ({ blogData }: any) => {
             searchBlog.map((data: any, index: number) => (
               <Link
                 key={index}
-                href={`./${index}`}
+                href={`./${data.id}`}
                 className="shadow-xl px-3 py-3 mb-5 rounded-md"
               >
                 <div className=" border-2 rounded-md shadow-xl">
                   <img src={data.eyecatch?.url} alt="" className="rounded-t-md"/>
-                  <h3 className="my-3 text-center">{data.title}</h3>
+                  <h3 className="my-3 text-center">{pageTitle(data.title)}</h3>
                   <small className="block  text-right pb-1 pr-1">
                     投稿：{new Date(data.publishedAt).toLocaleDateString()}
                   </small>

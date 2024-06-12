@@ -1,4 +1,4 @@
-import { SearchBlogsProps } from "@/type";
+import { SearchBlogsProps } from "@/app/type";
 import Link from "next/link";
 import React from "react";
 

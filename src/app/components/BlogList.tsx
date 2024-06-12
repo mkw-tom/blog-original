@@ -6,17 +6,20 @@ import Blogs from "./Blog";
 import SearchBlog from "./SearchBlog";
 
 const BLogLIst = ({ blogData }: any) => {
-  const [inputText, setInputText] = useState<string>();
-
-  // const searchBlog:any  = blogData.filter((data: any) =>
-  //   data.title.includes(`${inputText}`)
-  // );
   const [blogs, setBlogs] = useState<any[]>(blogData);
   const [isSelect, setIsSelect] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("新しい順");
 
+  const pageTitle = (title: any) => {
+    if (title.length > 15) {
+      return title.substring(0, 15) + "...";
+    } else {
+      return title;
+    }
+  };
+
   const recentSort = () => {
-    const newData:any[] = blogData.sort(
+    const newData: any[] = blogData.sort(
       (a: any, b: any) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)
     );
     setBlogs(newData);
@@ -36,24 +39,11 @@ const BLogLIst = ({ blogData }: any) => {
   return (
     <div>
       <div className="mt-40 bg-blue-100"></div>
-      {/* <main className="flex-col items-center text-center">
-        <h1 className="inline-block text-5xl font-bold text-amber-700 my-10">
-          welcome to my Blog !!
-        </h1>
-        <div className="flex justify-center mt-6">
-          <input
-            placeholder="検索"
-            type="text"
-            className="w-6/12 shadow-inner pl-3 rounded-l-full h-8"
-            onChange={(e) => setInputText(e.target.value)}
-          />
-          <button className="bg-amber-700 text-white rounded-r-full pr-2 pl-2 px-2">
-            <Search></Search>
-          </button>
-        </div>
-      </main> */}
+      <h1 className="block mx-auto text-center text-5xl text-amber-700 font-bold animate-bounce">
+        welcom to my Blog
+      </h1>
 
-      <div className="relative w-8/12 mx-auto mt-5 text-amber-700">
+      <div className="relative w-11/12 mx-auto mt-5 text-amber-700">
         <button
           className="bg-white border-2 focus:border-amber-500 rounded-md px-3 py-1 block ml-auto w-32"
           onClick={() => setIsSelect(!isSelect)}
@@ -85,23 +75,31 @@ const BLogLIst = ({ blogData }: any) => {
           記事が見つかりません。
         </p>
       ) : (
-        <ul className="flex flex-wrap gap-7 mt-12 mx-auto w-11/12 md:w-10/12 min-h-96">
-          {blogs.map((data: any, index: number) => (
-            <Link
-              key={data.id}
-              href={`blogPages/${index}`}
-              className="w-52 h-52 bg-orange-300"
-            >
-              <li className="inline-block w-full h-full bg-white rounded-md shadow-lg px-3 py-3 relative hover:opacity-70 hover:duration-1500">
-                <img src={data.eyecatch?.url} alt="eyecatch" />
-                <h2 className="text-center mt-5 ">{data.title}</h2>
-                <p className="absolute bottom-1 right-2 text-sm">
-                  投稿：{new Date(data.publishedAt).toLocaleDateString()}
-                </p>
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <div className="block mx-auto pl-10 md:px-10 w-11/12 h-full ">
+          <ul className="flex flex-wrap md:justify-between  mt-12 w-full h-auto gap-8 ">
+            {blogs.map((data: any) => (
+              <Link
+                key={data.id}
+                href={`blogPages/${data.id}`}
+                className="md:w-3/12 w-5/12 h-auto bg-orange-300 mb-10 "
+              >
+                <li className="inline-block w-full h-full bg-white rounded-md shadow-lg relative hover:opacity-70 hover:duration-1500">
+                  <img
+                    src={data.eyecatch?.url}
+                    alt="eyecatch"
+                    className="rounded-t-md"
+                  />
+                  <h2 className="text-center px-3 pt-5 pb-10 text-lg">
+                    {pageTitle(data.title)}
+                  </h2>
+                  <p className="absolute bottom-1 right-2 text-sm">
+                    投稿：{new Date(data.publishedAt).toLocaleDateString()}
+                  </p>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

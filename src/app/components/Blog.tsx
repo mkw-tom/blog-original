@@ -54,14 +54,14 @@ const Blogs = ({ blogData }: { blogData: any }) => {
         </ul>
       </div>
 
-      <ul className="flex flex-wrap gap-7 mt-12 mx-auto w-11/12 md:w-10/12 min-h-96">
+      <ul className="flex flex-wrap gap-7 mt-12 mx-auto w-11/12 md:w-11/12 min-h-96">
         {blogs.map((data: any, index: number) => (
           <Link
             key={data.id}
             href={`blogPages/${index}`}
-            className="w-52 h-52 bg-orange-300"
+            className="w-full h-full bg-orange-300"
           >
-            <li className="inline-block w-full h-full bg-white rounded-md shadow-lg px-3 py-3 relative hover:opacity-70 hover:duration-1500">
+            <li className="inline-block w-full h-full  bg-white rounded-md shadow-lg px-3 py-3 relative hover:opacity-70 hover:duration-1500">
               <img src={data.eyecatch?.url} alt="eyecatch" />
               <h2 className="text-center mt-5 ">{data.title}</h2>
               <p className="absolute bottom-1 right-2 text-sm">

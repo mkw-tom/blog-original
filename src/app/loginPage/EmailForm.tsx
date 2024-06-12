@@ -1,8 +1,8 @@
 import { Send, Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { ReactNode, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { EmailLogin } from "../libs/firebase.ts/auth";
-import { Inputs } from "@/type";
+import { EmailLogin } from "../libs/firebase/auth";
+import { Inputs } from "@/app/type";
 
 
 const EmailForm = () => {
