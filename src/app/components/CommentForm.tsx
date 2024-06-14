@@ -7,7 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentArea from "./CommentArea ";
 import { CommentDataProps } from "@/app/type";
-import { setCommentedData } from "@/app/libs/firebase/firestore";
+import { getCommnetDatas, setCommentedData } from "@/app/libs/firebase/firestore";
 
 const CommentForm = ({page}: {page: any}) => {
   const [user] = useAuthState(auth);
@@ -15,8 +15,12 @@ const CommentForm = ({page}: {page: any}) => {
   const [commentList, setCommentList] = useState<CommentDataProps[]>([])
   const ref = useRef<HTMLTextAreaElement>(null!);
 
-  useEffect(() => {
-    
+  useEffect( () => {
+    const setPageContents =  async () => {
+      const comments =  await getCommnetDatas(page.id, page.title);
+      await setCommentList(comments)
+    }
+    setPageContents()
   }, [])
 
   const handleCommented = () => {
@@ -25,6 +29,7 @@ const CommentForm = ({page}: {page: any}) => {
       userName: user?.displayName,
       userPhoto:user?.photoURL,
       text: newText,
+      likes: [],
     }
     setCommentedData(page.id, page.title, newData);
 

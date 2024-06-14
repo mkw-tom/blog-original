@@ -5,7 +5,7 @@ import { EmailLogin } from "../libs/firebase/auth";
 import { Inputs } from "@/app/type";
 
 
-const EmailForm = () => {
+const EmailForm = ({login}: {login: boolean}) => {
   const [type, setType] = useState<string>("password");
 
   const {

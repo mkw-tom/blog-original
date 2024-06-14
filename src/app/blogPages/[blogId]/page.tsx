@@ -50,7 +50,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
           <CommentForm page={page}/>
         </div>
         
-        <SideMenu blogData={blogData}/>
+        <SideMenu blogData={blogData} page={page}/>
       </main>
       <Footer />
     </div>

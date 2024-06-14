@@ -13,4 +13,5 @@ export type CommentDataProps = {
   userName: string | null | undefined;
   userPhoto: string | null | undefined;
   text: string;
+  likes: [];
 }

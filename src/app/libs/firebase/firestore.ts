@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 import { auth, db } from "./initialize"
 import { updateProfile } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
@@ -36,12 +36,15 @@ const updateProf = async (name: string | null | undefined, photo: any) => {
 };
 
 
+
+
+
 //⭐️ユーザー情報を保存⭐️
 export const saveUserData = async () => {
   if (auth.currentUser === null) {
     return
-  }
-
+    }
+    
   const profName = await getDoc(doc(db, "users", `${auth.currentUser?.uid}`));
   if (profName.exists()) {
     return;
@@ -73,9 +76,37 @@ export const saveUserData = async () => {
 };
 
 //⭐️ユーザーのコメントデータを保存⭐️
-export const setCommentedData = async (pageId: any, pageTitle: any, newData: CommentDataProps ) => {
+export const setCommentedData = async (pageId: string, pageTitle: string, newData: CommentDataProps ) => {
   const docId: string = uuidv4();
   await setDoc(doc(db, "comments", `${pageId}`, `${pageTitle}`, `${docId}`), {
     ...newData
   })
+}
+
+
+//記事ごとにコメントのデータを取得
+export const getCommnetDatas = async (pageId: string, pageTitle: string) => {
+  const datas = await getDocs(collection(db, "comments", pageId, pageTitle));
+  const dataLists: CommentDataProps[] = []
+  datas.forEach((data)  => {
+    const comment: CommentDataProps = {
+      uid: data.data().uid,
+      userName: data.data().userName,
+      userPhoto: data.data().userPhoto,
+      text: data.data().text,
+      likes: data.data().likes,
+    }
+    dataLists.push(comment)
+  });
+  return dataLists;
+}
+
+//いいね機能
+export const likesFunc = async (pageId: string, pageTitle: string, likesList: any) => {
+  await setDoc(doc(db, "blogs", pageId), {
+    title: pageTitle,
+    likes: [
+      ...likesList,
+    ]
+  });
 }
