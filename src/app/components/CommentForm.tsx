@@ -1,41 +1,60 @@
 "use client";
 import { auth } from "@/app/libs/firebase/initialize";
-import { Login, Send,  } from "@mui/icons-material";
+import { Login, Send } from "@mui/icons-material";
 import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentArea from "./CommentArea ";
 import { CommentDataProps } from "@/app/type";
-import { getCommnetDatas, setCommentedData } from "@/app/libs/firebase/firestore";
+import { addComment, getBlogContents } from "@/app/libs/firebase/firestore";
 
-const CommentForm = ({page}: {page: any}) => {
+const CommentForm = ({ page }: { page: any }) => {
   const [user] = useAuthState(auth);
-  const [newText, setNewText] = useState<string>("")
-  const [commentList, setCommentList] = useState<CommentDataProps[]>([])
+  const [newText, setNewText] = useState<string>("");
+  const [commentList, setCommentList] = useState<CommentDataProps[]>([]);
+  const [isLike, setIsLike] = useState<boolean>();
+  const [commentLikes, setCommentLikes] = useState<string[]>([]);
   const ref = useRef<HTMLTextAreaElement>(null!);
+  // const {data} = useData()
 
-  useEffect( () => {
-    const setPageContents =  async () => {
-      const comments =  await getCommnetDatas(page.id, page.title);
-      await setCommentList(comments)
+  useEffect(() => {
+    const getContents = async () => {
+      const contents: any | undefined = await getBlogContents(
+        page.id,
+        page.title
+      );
+      if (user === null) {
+        setCommentLikes(contents.likes);
+        setCommentList(contents.comments);
+        return;
+      }
+      setCommentLikes(contents.likes);
+      setCommentList(contents.comments);
+    };
+    getContents();
+  }, []);
+
+  const handleCommented = async () => {
+    const newList: CommentDataProps[] = [
+      ...commentList,
+      {
+        uid: user?.uid,
+        userName: user?.displayName,
+        userPhoto: user?.photoURL,
+        text: newText,
+        likes: [],
+      },
+    ];
+    setCommentList(newList);
+    await addComment(page.id, newList);
+    ref.current.value = "";
+  };
+
+  const commentLikesToggle = () => {
+    if (isLike === true) {
     }
-    setPageContents()
-  }, [])
-
-  const handleCommented = () => {
-    const newData: CommentDataProps = {
-      uid: user?.uid,
-      userName: user?.displayName,
-      userPhoto:user?.photoURL,
-      text: newText,
-      likes: [],
-    }
-    setCommentedData(page.id, page.title, newData);
-
-    setCommentList([...commentList, newData]);
-    ref.current.value = ""
-  }
+  };
 
   return (
     <div className="mt-16 border-t-2 border-gray-400">
@@ -49,7 +68,7 @@ const CommentForm = ({page}: {page: any}) => {
             <button className="block bg-amber-600 text-white mx-auto px-2 py-2 mt-1 rounded-md opacity-100 shadow-md shadow-amber-950 active:shadow-none active:translate-y-1">
               <Login></Login>
               <span className="ml-2 ">ログイン</span>
-            </button >
+            </button>
           </Link>
         </div>
       ) : (
@@ -74,12 +93,15 @@ const CommentForm = ({page}: {page: any}) => {
           <p className="my-5 text-gray-400">コメントがありません。</p>
         ) : (
           <ul className="flex-col w-full h-auto ">
-            <CommentArea commentList={commentList} user={user}/>
+            <CommentArea commentList={commentList} user={user} />
           </ul>
-        )} 
+        )}
       </div>
     </div>
   );
 };
 
 export default CommentForm;
+function commentlikesFunc(id: any, title: any, likesList: any) {
+  throw new Error("Function not implemented.");
+}

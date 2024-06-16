@@ -65,7 +65,7 @@ const Blogs = ({ blogData }: { blogData: any }) => {
               <img src={data.eyecatch?.url} alt="eyecatch" />
               <h2 className="text-center mt-5 ">{data.title}</h2>
               <p className="absolute bottom-1 right-2 text-sm">
-                投稿：{new Date(data.publishedAt).toLocaleDateString()}
+                投稿日：{new Date(data.publishedAt).toLocaleDateString()}
               </p>
             </li>
           </Link>

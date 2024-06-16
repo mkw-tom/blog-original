@@ -7,6 +7,11 @@ export type Inputs = {
   email: "string";
   password: "string"
 }
+export type BlogContentsProps = {
+  title: string,
+  likes: [],
+  comments: []
+}
 
 export type CommentDataProps = {
   uid: string | undefined;

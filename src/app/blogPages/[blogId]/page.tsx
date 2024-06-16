@@ -31,19 +31,14 @@ const page = async ({ params }: { params: { blogId: string } }) => {
         <div className="w-auto h-auto min-w-96 mx-5 px-7 py-10 rounded-md shadow-lg bg-white flex-1 relative">
           <Link href="/" className="text-sm text-blue-400 hover:opacity-65 absolute top-2 right-2">HOMEへ戻る</Link>
           <h1 className="h-auto text-3xl font-bold mb-6 border-l-8 border-l-amber-700 pl-5">{page.title}</h1>
-          <div className="flex w-full justify-between ">
-            <p className="flex flex-wrap  text-gray-500 w-8/12">
-              <span className="mr-3">
-                最終更新日:{new Date().toLocaleDateString(page.updataDateAt)}
+            <p className=" text-gray-500  ml-auto text-right">
+              <span className="mr-3 ml-auto">
+                更新日:{new Date(page.updatedAt).toLocaleDateString()}
               </span>
-              <span>
-                投稿日:{new Date().toLocaleDateString(page.updataDateAt)}
+              <span className="">
+                投稿日:{new Date(page.publishedAt).toLocaleDateString()}
               </span>
             </p>
-            <span>
-              <ThumbUpAltIcon></ThumbUpAltIcon> 100
-            </span>
-          </div>
           <img src={page.eyecatch?.url} alt="" />
           {parse(page.content)}
 

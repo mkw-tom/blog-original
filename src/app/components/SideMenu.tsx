@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ShareIcon from "@mui/icons-material/Share";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../libs/firebase/initialize";
 import { AnyMxRecord } from "dns";
-import { likesFunc } from "../libs/firebase/firestore";
+import { getBlogContents, likesFunc } from "../libs/firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
+import { FamilyRestroomRounded } from "@mui/icons-material";
 
 type SideMenuProps = {
   blogData: any;
@@ -16,14 +17,33 @@ type SideMenuProps = {
 
 const SideMenu = ({ blogData, page }: SideMenuProps) => {
   const [inputText, setInputText] = useState<string | undefined>("");
-  const [likesList, setlikesList] = useState<any>([]);
-  const [isLike, setIsLike] = useState<boolean>()
+  const [likesList, setlikesList] = useState<any[]>([]);
+  const [isLike, setIsLike] = useState<boolean | undefined>();
   const [user] = useAuthState(auth);
   const searchBlog: any = blogData.filter((data: any) =>
     data.title.includes(`${inputText}`)
   );
 
- 
+  useEffect(() => {
+    const getlikesData = async () => {
+      const contents: any | undefined = await getBlogContents(
+        page.id,
+        page.title
+      );
+      if (user === null) {
+        setlikesList(contents.likes);
+        setIsLike(false);
+        return;
+      }
+
+      setlikesList(contents.likes);
+      setIsLike(true)
+    };
+    console.log(likesList);
+    console.log(isLike);
+    getlikesData();
+  }, []);
+
   const pageTitle = (title: any) => {
     if (title.length > 15) {
       return title.substring(0, 15) + "...";
@@ -32,20 +52,26 @@ const SideMenu = ({ blogData, page }: SideMenuProps) => {
     }
   };
 
-
   //UIの変更がまだ
   const likesToggle = async () => {
-  
-    setIsLike(!isLike);
-    if (isLike === true) {
-      const newList = likesList.filter((data: string) => data !== user?.uid);
-      setlikesList(newList);
-      await likesFunc(page.id, page.title, likesList);
-    } else {
-      setlikesList([...likesList, user?.uid]);
-      await likesFunc(page.id, page.title, likesList);
+    if (user === null) {
+      return alert("ログインが必要です");
     }
-    console.log(likesList)
+    if (likesList.includes(`${user?.uid}`)) {
+      const newList = likesList.filter((data: string) => data !== user?.uid);
+      await likesFunc(page.id, likesList);
+      setlikesList(newList);
+      setIsLike(!isLike)
+      console.log(likesList);
+      return;
+    } else {
+      const newList = [...likesList, user?.uid];
+      setlikesList(newList);
+      await likesFunc(page.id, newList);
+      setIsLike(!isLike)
+      console.log(likesList);
+      return;
+    }
   };
 
   return (
@@ -60,8 +86,9 @@ const SideMenu = ({ blogData, page }: SideMenuProps) => {
       </div>
       <div className="hidden md:flex flex-col w-3/12">
         <div className="flex justify-center w-full mx-auto ">
+          <label htmlFor="">{likesList.length}</label>
           <button
-            className={`${isLike ? "text-red-600" : "text-white"} rounded-full text-white bg-red-200 px-2 py-4 hidden md:block hover:opacity-65 mr-2 w-20`}
+            className={`${isLike ? "text-red-600" : "text-white"} rounded-full  bg-red-200 px-2 py-4 hidden md:block hover:opacity-65 mr-2 w-20`}
             onClick={likesToggle}
           >
             <ThumbUpAltIcon></ThumbUpAltIcon>
