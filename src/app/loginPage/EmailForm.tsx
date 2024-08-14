@@ -1,8 +1,7 @@
+import { Inputs } from "@/types/type";
 import { Send, Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { ReactNode, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { EmailLogin } from "../libs/firebase/auth";
-import { Inputs } from "@/app/type";
 
 
 const EmailForm = ({login}: {login: boolean}) => {
@@ -14,9 +13,9 @@ const EmailForm = ({login}: {login: boolean}) => {
     watch,
     formState: { errors },
   } = useForm<Inputs>({mode: "onChange"});
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
-    EmailLogin(data.email, data.password)
   }
   return (
     <form className="relative flex-col w-full" onSubmit={handleSubmit(onSubmit)}>

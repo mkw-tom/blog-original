@@ -21,7 +21,7 @@ export const handleLogout = () => {
 
 
 //ーーーーーgoogleログインーーーーー
-export const GoogleLogin = async (isLogin: boolean) => {
+export const GoogleLogin = async () => {
   await signInWithPopup(auth, GoogleProvider)
     .then((result) => {
       const credential: OAuthCredential | null =
@@ -31,10 +31,6 @@ export const GoogleLogin = async (isLogin: boolean) => {
     .catch((error) => {
       window.alert("ログインに失敗しました。");
     });
-    if(!isLogin) {
-      const userData = await getDoc(doc(db,"users", `${auth.currentUser?.uid}`))
-      userData.exists() ? alert("すでに登録済みです"): alert("ようこそ！");
-    }
 };
 
 //ーーーーーgithubログインーーーーー

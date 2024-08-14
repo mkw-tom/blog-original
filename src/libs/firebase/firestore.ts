@@ -9,7 +9,7 @@ import {
 import { auth, db } from "./initialize";
 import { updateProfile } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
-import { BlogContentsProps, CommentDataProps } from "@/app/type";
+import { BlogContentsProps } from "@/types/type";
 
 //ユーザーデータ作成の手続き
 const createUserData = async () => {

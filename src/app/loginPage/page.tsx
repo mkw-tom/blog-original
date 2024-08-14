@@ -1,28 +1,13 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
-import Header from "../components/common/Header";
-import Footer from "../components/common/Footer ";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer ";
 import LoginForms from "./LoginForms";
-import { GoogleLogin } from "../libs/firebase/auth";
-import { auth } from "../libs/firebase/initialize";
-import { useAuthState } from "react-firebase-hooks/auth";
-import Link from "next/link";
 import { ArrowBack } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
-import { saveUserData } from "../libs/firebase/firestore";
+import router from "next/router";
 
 const page = () => {
-  const [emailLogin, setEmailLogin] = useState<boolean>(false);
-  const [user] = useAuthState(auth);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (user === null) {
-      return;
-    }
-    saveUserData();
-  }, [user]);
-
+  // const [emailLogin, setEmailLogin] = useState<boolean>(false);
   return (
     <div>
       <Header />
@@ -39,9 +24,7 @@ const page = () => {
               <li className="text-bold text-2xl py-6">✔︎ ブックマーク機能</li>
             </ul>
           </div>
-          {!user ? (
             <LoginForms />
-          ) : (
             <div className="mt-10 bg-gray-50 md:w-6/12 w-96 h-auto mx-auto rounded-3xl shadow-xl ">
               <div className="flex-col py-20">
                 <p className="text-xl mb-5">ログインが完了しました！</p>
@@ -55,7 +38,6 @@ const page = () => {
                 </button>
               </div>
             </div>
-          )}
         </div>
       </main>
       <Footer />
