@@ -7,6 +7,8 @@ export type Inputs = {
   email: "string";
   password: "string"
 }
+
+//firebase
 export type BlogContentsProps = {
   title: string,
   likes: [],

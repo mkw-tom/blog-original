@@ -1,16 +1,16 @@
 import Link from "next/link";
-import Header from "./components/common/Header";
-import Footer from "./components/common/Footer ";
-import { getBlogData } from "./libs/micro-cms/client";
-import BlogList from "./components/BlogList";
+import Header from "../components/Header";
+import Footer from "../components/Footer ";
+import { getBlogData } from "../libs/micro-cms/client";
+import BlogList from "./blogPage/BlogList";
+import MainArticle from "./blogPage/MainArticle";
+// import { BlogDataProvider } from "./contexts/BlogDataContext";
 
 export default async function Home() {
-  const blogData = await getBlogData();
 
   return (
-    <div>
+    <div className="w-full h-auto bg-mainColor">
       <Header />
-      <BlogList blogData={blogData} />
       <Footer />
     </div>
   );

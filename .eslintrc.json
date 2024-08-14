@@ -1,3 +1,38 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "react-hooks"
+  ],
+  "rules": {
+    "prettier/prettier": "error", // Prettier のフォーマットルールに従わない場合にエラーを表示
+    "react/react-in-jsx-scope": "off", // Next.js では不要（React 18 の新しい JSX トランスフォームを使用しているため）
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }], // 未使用の変数に警告を表示（無視パターンを追加）
+    "@typescript-eslint/explicit-module-boundary-types": "off", // 明示的な関数の戻り値の型定義をオフにする
+    "no-console": "warn", // コンソールログに警告を表示
+    "no-debugger": "warn" // デバッガーに警告を表示
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // React のバージョンを自動検出
+    }
+  }
 }

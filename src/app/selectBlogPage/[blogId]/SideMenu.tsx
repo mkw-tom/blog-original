@@ -4,9 +4,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ShareIcon from "@mui/icons-material/Share";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db } from "../libs/firebase/initialize";
 import { AnyMxRecord } from "dns";
-import { getBlogContents, likesFunc } from "../libs/firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
 import { FamilyRestroomRounded } from "@mui/icons-material";
 
@@ -19,58 +17,15 @@ const SideMenu = ({ blogData, page }: SideMenuProps) => {
   const [inputText, setInputText] = useState<string | undefined>("");
   const [likesList, setlikesList] = useState<any[]>([]);
   const [isLike, setIsLike] = useState<boolean | undefined>();
-  const [user] = useAuthState(auth);
   const searchBlog: any = blogData.filter((data: any) =>
     data.title.includes(`${inputText}`)
   );
-
-  useEffect(() => {
-    const getlikesData = async () => {
-      const contents: any | undefined = await getBlogContents(
-        page.id,
-        page.title
-      );
-      if (user === null) {
-        setlikesList(contents.likes);
-        setIsLike(false);
-        return;
-      }
-
-      setlikesList(contents.likes);
-      setIsLike(true)
-    };
-    console.log(likesList);
-    console.log(isLike);
-    getlikesData();
-  }, []);
 
   const pageTitle = (title: any) => {
     if (title.length > 15) {
       return title.substring(0, 15) + "...";
     } else {
       return title;
-    }
-  };
-
-  //UIの変更がまだ
-  const likesToggle = async () => {
-    if (user === null) {
-      return alert("ログインが必要です");
-    }
-    if (likesList.includes(`${user?.uid}`)) {
-      const newList = likesList.filter((data: string) => data !== user?.uid);
-      await likesFunc(page.id, likesList);
-      setlikesList(newList);
-      setIsLike(!isLike)
-      console.log(likesList);
-      return;
-    } else {
-      const newList = [...likesList, user?.uid];
-      setlikesList(newList);
-      await likesFunc(page.id, newList);
-      setIsLike(!isLike)
-      console.log(likesList);
-      return;
     }
   };
 
@@ -89,7 +44,6 @@ const SideMenu = ({ blogData, page }: SideMenuProps) => {
           <label htmlFor="">{likesList.length}</label>
           <button
             className={`${isLike ? "text-red-600" : "text-white"} rounded-full  bg-red-200 px-2 py-4 hidden md:block hover:opacity-65 mr-2 w-20`}
-            onClick={likesToggle}
           >
             <ThumbUpAltIcon></ThumbUpAltIcon>
           </button>

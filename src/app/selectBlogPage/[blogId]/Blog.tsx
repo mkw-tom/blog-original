@@ -58,7 +58,7 @@ const Blogs = ({ blogData }: { blogData: any }) => {
         {blogs.map((data: any, index: number) => (
           <Link
             key={data.id}
-            href={`blogPages/${index}`}
+            href={`selectBlogPage/${index}`}
             className="w-full h-full bg-orange-300"
           >
             <li className="inline-block w-full h-full  bg-white rounded-md shadow-lg px-3 py-3 relative hover:opacity-70 hover:duration-1500">
