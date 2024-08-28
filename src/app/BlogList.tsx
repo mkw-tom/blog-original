@@ -2,14 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardArrowDown, Search } from '@mui/icons-material';
 import Link from 'next/link';
-import Blogs from '../selectBlogPage/[blogId]/Blog';
-import SearchBlog from '../selectBlogPage/[blogId]/SearchBlog';
+import Blogs from './selectBlogPage/[blogId]/Blog';
+import SearchBlog from './selectBlogPage/[blogId]/SearchBlog';
 // import { useBlogData } from "../contexts/BlogDataContext";
 import Image from 'next/image';
+import useBlogsFilter from '@/Hooks/useBlogsFilter';
 
 const BLogLIst = ({ blogData }: { blogData: BlogDataType[] }) => {
-  const [isSelect, setIsSelect] = useState<boolean>(false);
-  const [buttonText, setButtonText] = useState<string>('新しい順');
+  const { filterToggle, isSelect, buttonText, recentSort, oldestSort} = useBlogsFilter(blogData);
+  // const [isSelect, setIsSelect] = useState<boolean>(false);
+  // const [buttonText, setButtonText] = useState<string>('新しい順');
 
   const pageTitle = (title: any) => {
     if (title.length > 15) {
@@ -19,31 +21,15 @@ const BLogLIst = ({ blogData }: { blogData: BlogDataType[] }) => {
     }
   };
 
-  const recentSort = () => {
-    blogData.sort(
-      (a: any, b: any) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)
-    );
-    // setBlogs(newData);
-    setButtonText('新しい順');
-    setIsSelect(false);
-  };
-
-  const oldestSort = () => {
-    blogData.sort(
-      (a: any, b: any) => Date.parse(a.publishedAt) - Date.parse(b.publishedAt)
-    );
-    // setBlogs(newData);
-    setButtonText('古い順');
-    setIsSelect(false);
-  };
 
   return (
     <div>
       <div className="relative w-11/12 mx-auto mt-5 text-orange-600">
         <h1 className="text-4xl text-orange-600 font-bold">Blogs</h1>
         <button
-          className="bg-white border-2 focus:border-amber-500 rounded-md px-3 py-1 block ml-auto w-32"
-          onClick={() => setIsSelect(!isSelect)}
+          className="bg-white border-2 focus:border-orange-600 rounded-md px-3 py-1 block ml-auto w-32"
+          // onClick={() => setIsSelect(!isSelect)}
+          onClick={filterToggle}
         >
           <span>{buttonText}</span>
           <KeyboardArrowDown></KeyboardArrowDown>
@@ -78,7 +64,7 @@ const BLogLIst = ({ blogData }: { blogData: BlogDataType[] }) => {
               <Link
                 key={data.id}
                 href={`selectBlogPage/${data.id}`}
-                className="md:w-72 w-72 h-auto bg-orange-300 mb-10 "
+                className="md:w-72 w-72 h-auto mb-10 "
               >
                 <li className="inline-block w-72 h-full bg-white rounded-md shadow-lg relative hover:opacity-70 hover:duration-1500">
                   <img

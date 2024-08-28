@@ -19,12 +19,12 @@ const page = async ({ params }: { params: { blogId: string } }) => {
   
 
   return (
-    <div>
+    <div className="bg-mainColor">
       <Header />
-      <div className="w-full h-full bg-mainColor">
+      <div className="w-full h-full ">
         <main className="flex justify-around w-11/12 h-auto mb-16 mx-auto pt-10">
           <div className="w-auto h-auto min-w-96 mx-5 px-7 py-10 rounded-md shadow-lg bg-white flex-1 relative">
-            <Link href="/blogPage" className="text-sm text-blue-400 hover:opacity-65 absolute top-2 right-2">Back to</Link>
+            <Link href="/" className="text-sm text-blue-400 hover:opacity-65 absolute top-2 right-2">Back to</Link>
             <h1 className="h-auto text-3xl font-bold mb-6 border-l-8 border-l-orange-600 pl-5">{page.title}</h1>
               <p className=" text-gray-500  ml-auto text-right">
                 <span className="mr-3 ml-auto">
