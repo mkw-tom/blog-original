@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
-import { GitHubProvider, GoogleProvider, auth, db } from "./initialize";
+import { GitHubProvider, GoogleProvider, auth, db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 //-------サインアウト--ーーー

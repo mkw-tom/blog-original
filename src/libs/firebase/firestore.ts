@@ -6,7 +6,7 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { auth, db } from "./initialize";
+import { auth, db } from "./firebase";
 import { updateProfile } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
 import { BlogContentsProps } from "@/types/type";
